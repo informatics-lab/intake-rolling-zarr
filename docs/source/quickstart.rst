@@ -22,13 +22,13 @@ Note that S3 inventory manifests sources do not yet support streaming from an In
 Ad-hoc
 ~~~~~~
 
-After installation, the function ``intake.open_s3_manifest``
-will become available. They can be used to open S3 inventory manifests datasets.
+After installation, the function ``intake.intake_rolling_zarr``
+will become available. They can be used to open rolling zarr datasets.
 
 Creating Catalog Entries
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Catalog entries must specify ``driver: s3-manifest``.
+Catalog entries must specify ``driver: rolling_zarr``.
 
 
 Using a Catalog

@@ -1,5 +1,7 @@
 intake
+numcodecs
 zarr
 numpy
 s3fs
 xarray
+iris

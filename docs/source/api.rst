@@ -2,7 +2,7 @@ API Reference
 =============
 
 .. autosummary::
-   intake_s3_manifests.S3ManifestSource
+   intake_rolling_zarr.RollingZarrSource
 
-.. autoclass:: intake_s3_manifests.S3ManifestSource
+.. autoclass:: intake_rolling_zarr.RollingZarrSource
    :members:

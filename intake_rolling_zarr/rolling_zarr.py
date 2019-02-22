@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
 from . import __version__
-from intake.source.base import DataSource, Schema
-
-import json
-import dask.dataframe as dd
-from datetime import datetime, timedelta
-import s3fs
+from intake.source.base import DataSource
 from .rolling_store import OffSetS3Map
 import xarray
+
+
+def maybe_to_iris(ds):
+    if len(ds.data_vars) == 1:
+        return ds[list(ds.data_vars)[0]].to_iris()
+
+    return ds
+
 
 class RollingZarrSource(DataSource):
     """Common behaviours for plugins in this repo"""
@@ -23,40 +26,21 @@ class RollingZarrSource(DataSource):
         path : str
             The S3 url to the  which contains the manifest files.
         """
-        self._path = path
+        if not url.startswith('s3://'):
+            raise ValueError('url must be a valid s3 url starting s3://')
+        url = url[len('s3://'):]
+        self._url = url
         self._temp_chunk_path = temp_chunk_path
-        
-
-
-        # if self._manifest_date == 'latest':
-        #     self._manifest_date = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
-        # self._s3_prefix = s3_prefix
-        # self._urlpath = '{prefix}{manifest_bucket}/{source_bucket}/{config_id}/{date}/manifest.json'.format(
-        #     prefix=self._s3_prefix,
-        #     manifest_bucket=self._manifest_bucket,
-        #     source_bucket=self._source_bucket,
-        #     config_id=self._config_id,
-        #     date=self._manifest_date)
-        # self._extract_key_regex = extract_key_regex
-        # if self._extract_key_regex is not None:
-        #     self._extract_key_regex = r'%s' % extract_key_regex
-        # self._s3_manifest_kwargs = s3_manifest_kwargs or {}
-        # self._dataframe = None
-
-
+        self._ds = None
 
     def read(self):
-         store = OffSetS3Map(root=self._path, temp_chunk_path=self._temp_chunk_path, check=False)
-         return xarray.open_zarr(store)
-
-
-    def _get_partition(self, i):
-        self._get_schema()
-        return self._dataframe.get_partition(i).compute()
-
-    def read(self):
-        self._get_schema()
-        return self._dataframe.compute()
+        print(self._url)
+        if not self._ds:
+            store = OffSetS3Map(root=self._url,
+                                temp_chunk_path=self._temp_chunk_path,
+                                check=False)
+            self._ds = xarray.open_zarr(store)
+        return maybe_to_iris(self._ds)
 
     def to_dask(self):
         self._get_schema()
@@ -64,3 +48,4 @@ class RollingZarrSource(DataSource):
 
     def _close(self):
         self._dataframe = None
+        self._ds = None

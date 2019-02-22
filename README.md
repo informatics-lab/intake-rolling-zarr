@@ -16,3 +16,11 @@ The conda install instructions are:
 ```
 conda install -c informaticslab -c intake intake-rolling-zarr
 ```
+
+
+
+import intake_rolling_zarr
+data = intake_rolling_zarr.RollingZarrSource('s3://metoffice-aws-earth-zarr/mo-atmospheric-mogreps-uk-prd-air_temperature-at_heights.zarr')
+data.read()
+
+cat = intake.open_yaml_file_cat("/Users/theo/repos/intake-rolling-zarr/tests/data/s3.catalog.yaml")

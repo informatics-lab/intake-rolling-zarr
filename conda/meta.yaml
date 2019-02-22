@@ -1,5 +1,5 @@
 package:
-   name: intake_s3_manifests
+   name: intake_rolling_zarr
    version: {{ GIT_DESCRIBE_TAG }}
 
 source:
@@ -19,9 +19,12 @@ requirements:
     - pandas
   run:
     - intake>=0.2
+    - numcodecs
+    - zarr
+    - numpy
     - s3fs
-    - dask
-    - pandas
+    - xarray
+    - iris
 
 test:
   source_files:
@@ -36,4 +39,4 @@ about:
   license: BSD
   license_file: LICENSE
   summary: |
-    S3 manifests plugin for Intake
+    Rolling Zarr plugin for Intake
