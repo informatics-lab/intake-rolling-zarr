@@ -2,7 +2,7 @@ plugins:
   source:
     - module: intake-rolling-zarr
 sources:
-  mogreps_g_manifest:
+  mogreps_uk_air_temp:
     description: The S3 manifests for mogreps-g.
     driver: rolling_zarr
     args:
