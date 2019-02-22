@@ -1,0 +1,10 @@
+plugins:
+  source:
+    - module: intake-rolling-zarr
+sources:
+  mogreps_g_manifest:
+    description: The S3 manifests for mogreps-g.
+    driver: rolling_zarr
+    args:
+      url: 's3://metoffice-aws-earth-zarr/mo-atmospheric-mogreps-uk-prd-air_temperature-at_heights.zarr'
+      

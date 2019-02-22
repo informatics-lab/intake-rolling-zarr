@@ -1,0 +1,13 @@
+name: intake-s3-manifests
+channels:
+  - intake
+  - informaticslab
+  - defaults
+dependencies:
+  - python=3.6
+  - intake
+  - intake-s3-manifests
+  - pip:
+    - sphinx
+    - sphinx-rtd-theme
+    - numpydoc

@@ -1,0 +1,5 @@
+intake
+zarr
+numpy
+s3fs
+xarray

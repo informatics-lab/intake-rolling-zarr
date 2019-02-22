@@ -1,0 +1,39 @@
+package:
+   name: intake_s3_manifests
+   version: {{ GIT_DESCRIBE_TAG }}
+
+source:
+   path: ..
+git:
+  depth: false
+
+build:
+  number: {{ GIT_DESCRIBE_NUMBER }}
+  script: python setup.py install --single-version-externally-managed --record=record.txt
+  noarch: python
+
+requirements:
+  build:
+    - python
+    - jinja2
+    - pandas
+  run:
+    - intake>=0.2
+    - s3fs
+    - dask
+    - pandas
+
+test:
+  source_files:
+    - tests
+  requires:
+    - pytest
+  commands:
+    - py.test --verbose
+
+about:
+  home: https://github.com/informaticslab/intake-s3-manifests
+  license: BSD
+  license_file: LICENSE
+  summary: |
+    S3 manifests plugin for Intake
