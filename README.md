@@ -24,3 +24,5 @@ data = intake_rolling_zarr.RollingZarrSource('s3://metoffice-aws-earth-zarr/mo-a
 data.read()
 
 cat = intake.open_yaml_file_cat("/Users/theo/repos/intake-rolling-zarr/tests/data/s3.catalog.yaml")
+
+
