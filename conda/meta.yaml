@@ -35,7 +35,7 @@ test:
     - py.test --verbose
 
 about:
-  home: https://github.com/informaticslab/intake-s3-manifests
+  home: https://github.com/informatics-lab/intake-rolling-zarr
   license: BSD
   license_file: LICENSE
   summary: |
