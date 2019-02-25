@@ -1,9 +1,9 @@
 plugins:
   source:
-    - module: intake-rolling-zarr
+    - module: intake_rolling_zarr
 sources:
   mogreps_uk_air_temp:
-    description: The S3 manifests for mogreps-g.
+    description: Air temperature at heights. Rolling dataset of the last five days of MOGREPS UK forecasts. 
     driver: rolling_zarr
     args:
       url: 's3://metoffice-aws-earth-zarr/mo-atmospheric-mogreps-uk-prd-air_temperature-at_heights.zarr'
