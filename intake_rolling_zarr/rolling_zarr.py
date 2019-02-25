@@ -34,7 +34,6 @@ class RollingZarrSource(DataSource):
         self._ds = None
 
     def read(self):
-        print(self._url)
         if not self._ds:
             store = OffSetS3Map(root=self._url,
                                 temp_chunk_path=self._temp_chunk_path,
