@@ -1,4 +1,4 @@
-name: intake-s3-manifests
+name: intake-rolling-zarr
 channels:
   - intake
   - informaticslab
@@ -6,7 +6,7 @@ channels:
 dependencies:
   - python=3.6
   - intake
-  - intake-s3-manifests
+  - intake-rolling-zarr
   - pip:
     - sphinx
     - sphinx-rtd-theme
